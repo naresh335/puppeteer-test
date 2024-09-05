@@ -15,7 +15,9 @@ jobs:
 
     - name: Run Puppeteer using GHCR Docker image
       run: |
-        docker run --rm -v ${{ github.workspace }}:/usr/src/app ghcr.io/puppeteer/puppeteer:latest node /usr/src/app/screenshot.js
+        # Run the container, mount the repository, and install dependencies
+        docker run --rm -v ${{ github.workspace }}:/usr/src/app ghcr.io/puppeteer/puppeteer:latest \
+        /bin/bash -c "cd /usr/src/app && npm install && node /usr/src/app/screenshot.js"
 
     - name: Upload Screenshot
       uses: actions/upload-artifact@v3
