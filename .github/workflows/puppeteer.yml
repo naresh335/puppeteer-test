@@ -13,13 +13,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       
-    - name: Run Puppeteer using GHCR Docker image with UID/GID override
+    - name: Run Puppeteer using GHCR Docker image with fixed cache permissions
       run: |
-        # Override the UID and GID to match the runner's UID (1001) and GID (127) when running the container
+        # Fix the cache permissions before running npm install
         docker run --rm -v ${{ github.workspace }}:/home/pptruser/app \
         --user $(id -u):$(id -g) \
         ghcr.io/puppeteer/puppeteer:latest \
-        /bin/bash -c "cd /home/pptruser/app && npm install && node /home/pptruser/app/screenshot.js"
+        /bin/bash -c "npm cache clean --force && mkdir -p /home/pptruser/.npm && npm config set cache /home/pptruser/.npm && cd /home/pptruser/app && npm install && node /home/pptruser/app/screenshot.js"
+        
 
     - name: Upload Screenshot
       uses: actions/upload-artifact@v3
