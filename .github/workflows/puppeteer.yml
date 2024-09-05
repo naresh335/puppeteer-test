@@ -18,7 +18,7 @@ jobs:
       run: |
         # Run the container as root to avoid permission issues
         docker run --rm -v ${{ github.workspace }}:/home/pptruser/app \
-        --user $(id -u):$(id -g) \
+        --user 999:999 \
         ghcr.io/puppeteer/puppeteer:latest \
         /bin/bash -c "cd /home/pptruser/app && npm install && node /home/pptruser/app/screenshot.js"
 
