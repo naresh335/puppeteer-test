@@ -1,0 +1,19 @@
+{
+  "name": "puppeteer-github-action",
+  "version": "1.0.0",
+  "description": "A project to run Puppeteer in a GitHub Action",
+  "main": "screenshot.js",
+  "scripts": {
+    "start": "node screenshot.js"
+  },
+  "keywords": [
+    "puppeteer",
+    "github-action",
+    "automation"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^21.0.0"
+  }
+}
