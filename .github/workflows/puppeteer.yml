@@ -9,27 +9,16 @@ jobs:
   puppeteer_job:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [20.x] # Specify the Node.js version
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Run Puppeteer Script
-      run: node screenshot.js
+    - name: Run Puppeteer using GHCR Docker image
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/usr/src/app ghcr.io/puppeteer/puppeteer:latest node /usr/src/app/screenshot.js
 
     - name: Upload Screenshot
       uses: actions/upload-artifact@v3
       with:
         name: screenshot
-        path: screenshot.png
+        path: ./screenshots/screenshot.png

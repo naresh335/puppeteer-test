@@ -6,14 +6,8 @@
   "scripts": {
     "start": "node screenshot.js"
   },
-  "keywords": [
-    "puppeteer",
-    "github-action",
-    "automation"
-  ],
-  "author": "Your Name",
   "license": "MIT",
   "dependencies": {
-    "puppeteer": "^21.0.0"
+    "puppeteer": "^23.3.0"
   }
 }
